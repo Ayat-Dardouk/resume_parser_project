@@ -1,13 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Display</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Submission</title>
 </head>
 <body>
-<h1>
-	Welcome ! {{email|safe}}
-</h1>
-Your Data has been saved Successfully!
+    <h1>Submit Your CV Information</h1>
+    <form action="/save" method="POST">
+        {% csrf_token %}
 
+        <!-- Personal Information -->
+        <h2>Personal Information</h2>
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" required><br><br>
+
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" required><br><br>
+
+        <label for="Phone">Phone:</label>
+        <input type="text" id="Phone" name="Phone" required><br><br>
+
+        <label for="github">GitHub:</label>
+        <input type="url" id="github" name="github"><br><br>
+
+        <label for="linkedin">LinkedIn:</label>
+        <input type="url" id="linkedin" name="linkedin"><br><br>
+
+        <label for="Address">Address:</label>
+        <input type="text" id="Address" name="Address"><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <label for="DOB">Date of Birth:</label>
+        <input type="date" id="DOB" name="DOB"><br><br>
+
+        <label for="Hobbies">Hobbies:</label>
+        <textarea id="Hobbies" name="Hobbies"></textarea><br><br>
+
+        <label for="Marital">Marital Status:</label>
+        <select id="Marital" name="Marital">
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+        </select><br><br>
+
+        <!-- Education Section -->
+        <h2>Education</h2>
+        <div id="education">
+            <div>
+                <label for="eDegree1">Degree:</label>
+                <input type="text" id="eDegree1" name="eDegree1"><br><br>
+
+                <label for="efield1">Field of Study:</label>
+                <input type="text" id="efield1" name="efield1"><br><br>
+
+                <label for="eInstitute1">Institution:</label>
+                <input type="text" id="eInstitute1" name="eInstitute1"><br><br>
+
+                <label for="eStart1">Start Date:</label>
+                <input type="date" id="eStart1" name="eStart1"><br><br>
+
+                <label for="eEnd1">End Date:</label>
+                <input type="date" id="eEnd1" name="eEnd1"><br><br>
+
+                <label for="eGrade1">Grade:</label>
+                <input type="text" id="eGrade1" name="eGrade1"><br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addEducation()">Add More Education</button><br><br>
+        <input type="hidden" id="edutotal" name="edutotal" value="1">
+
+        <!-- Internship Section -->
+        <h2>Internships</h2>
+        <div id="internships">
+            <div>
+                <label for="iPosition1">Position:</label>
+                <input type="text" id="iPosition1" name="iPosition1"><br><br>
+
+                <label for="iCompany1">Company:</label>
+                <input type="text" id="iCompany1" name="iCompany1"><br><br>
+
+                <label for="iLocation1">Location:</label>
+                <input type="text" id="iLocation1" name="iLocation1"><br><br>
+
+                <label for="iDate1">Start Date:</label>
+                <input type="date" id="iDate1" name="iDate1"><br><br>
+
+                <label for="iEndDate1">End Date:</label>
+                <input type="date" id="iEndDate1" name="iEndDate1"><br><br>
+
+                <label for="iDescription1">Description:</label>
+                <textarea id="iDescription1" name="iDescription1"></textarea><br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addInternship()">Add More Internships</button><br><br>
+        <input type="hidden" id="intertotal" name="intertotal" value="1">
+
+        <!-- Additional sections for Projects, Skills, and Certifications -->
+        <!-- Follow similar patterns for other fields as needed -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        let educationCount = 1;
+        let internshipCount = 1;
+
+        function addEducation() {
+            educationCount++;
+            const educationDiv = document.getElementById('education');
+            const newEducation = `
+                <div>
+                    <label for="eDegree${educationCount}">Degree:</label>
+                    <input type="text" id="eDegree${educationCount}" name="eDegree${educationCount}"><br><br>
+                    
+                    <label for="efield${educationCount}">Field of Study:</label>
+                    <input type="text" id="efield${educationCount}" name="efield${educationCount}"><br><br>
+                    
+                    <label for="eInstitute${educationCount}">Institution:</label>
+                    <input type="text" id="eInstitute${educationCount}" name="eInstitute${educationCount}"><br><br>
+                    
+                    <label for="eStart${educationCount}">Start Date:</label>
+                    <input type="date" id="eStart${educationCount}" name="eStart${educationCount}"><br><br>
+                    
+                    <label for="eEnd${educationCount}">End Date:</label>
+                    <input type="date" id="eEnd${educationCount}" name="eEnd${educationCount}"><br><br>
+                    
+                    <label for="eGrade${educationCount}">Grade:</label>
+                    <input type="text" id="eGrade${educationCount}" name="eGrade${educationCount}"><br><br>
+                </div>
+            `;
+            educationDiv.insertAdjacentHTML('beforeend', newEducation);
+            document.getElementById('edutotal').value = educationCount;
+        }
+
+        function addInternship() {
+            internshipCount++;
+            const internshipDiv = document.getElementById('internships');
+            const newInternship = `
+                <div>
+                    <label for="iPosition${internshipCount}">Position:</label>
+                    <input type="text" id="iPosition${internshipCount}" name="iPosition${internshipCount}"><br><br>
+                    
+                    <label for="iCompany${internshipCount}">Company:</label>
+                    <input type="text" id="iCompany${internshipCount}" name="iCompany${internshipCount}"><br><br>
+                    
+                    <label for="iLocation${internshipCount}">Location:</label>
+                    <input type="text" id="iLocation${internshipCount}" name="iLocation${internshipCount}"><br><br>
+                    
+                    <label for="iDate${internshipCount}">Start Date:</label>
+                    <input type="date" id="iDate${internshipCount}" name="iDate${internshipCount}"><br><br>
+                    
+                    <label for="iEndDate${internshipCount}">End Date:</label>
+                    <input type="date" id="iEndDate${internshipCount}" name="iEndDate${internshipCount}"><br><br>
+                    
+                    <label for="iDescription${internshipCount}">Description:</label>
+                    <textarea id="iDescription${internshipCount}" name="iDescription${internshipCount}"></textarea><br><br>
+                </div>
+            `;
+            internshipDiv.insertAdjacentHTML('beforeend', newInternship);
+            document.getElementById('intertotal').value = internshipCount;
+        }
+    </script>
 </body>
 </html>

@@ -2,15 +2,22 @@ from django.db import models
 
 # Create your models here.
 #academic
+
 class add_degree(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	name=models.CharField(max_length=200)
 	def __str__(self):
 		return self.name
 class add_field_of_study(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	name=models.CharField(max_length=200)
 	def __str__(self):
 		return self.name
 class academic(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	name=models.CharField(max_length=200)
 	email=models.CharField(max_length=200)
 	school_or_college=models.CharField(max_length=200)
@@ -44,6 +51,8 @@ EMP_TYPE_CHOICES = (
 
 
 class professional_pro(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	name=models.CharField(max_length=200)
 	email=models.CharField(max_length=200)
 	title=models.CharField(max_length=400)
@@ -57,6 +66,8 @@ class professional_pro(models.Model):
 	def __str__(self):
 		return self.name
 class add_project(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	email=models.CharField(max_length=200)
 	project_name=models.CharField(max_length=200)
 	start_date=models.DateField()
@@ -102,6 +113,8 @@ CATEGORY_CHOICES = (
 
 #social
 class social(models.Model):
+	id = models.BigAutoField(primary_key=True)
+
 	#name=models.CharField(max_length=200,null=True,blank=True)
 	email=models.CharField(max_length=200)
 	dob=models.CharField(max_length=400)

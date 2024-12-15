@@ -1,7 +1,10 @@
 
 #from nltk.corpus import stopwords 
 #from nltk.tokenize import word_tokenize 
+
 import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
 
 def basicdetails(lines,text):
@@ -21,7 +24,7 @@ def basicdetails(lines,text):
             # First name and Last name are always Proper Nouns
         pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
         
-        matcher.add('NAME', None, pattern)
+        matcher.add('NAME', [pattern])
         matches = matcher(nlp_text)
         for match_id, start, end in matches:
             span = nlp_text[start:end]
@@ -71,7 +74,12 @@ def basicdetails(lines,text):
     #print(word_tokens)
 
     def extract_degrees(lines):
-        degrees=['b.tech','ba','ma','xii','b.sc','m.sc','m.tech','high','senior','x','bachelor','bachelors','master','masters','specialization','mba','msc','10+2']
+        degrees=[
+        'b.tech', 'ba', 'ma', 'xii', 'b.sc', 'm.sc', 'm.tech', 'high', 'senior', 'x', 'bachelor', 
+        'bachelors', 'master', 'masters', 'specialization', 'mba', 'msc', '10+2', 'diploma', 'associates', 
+        'graduate', 'postgraduate', 'undergraduate', 'doctorate', 'phd', 'certification', 'degree', 'schooling', 
+        'b.eng', 'm.eng', 'a-level', 'o-level', 'higher secondary', 'junior college', 'intermediate' , 'school' , 'university'
+    ] 
         in_degrees=[]
         for w in lines:
             w=w.lower()
@@ -88,6 +96,9 @@ def basicdetails(lines,text):
             count_edu=len(degrees)
             #finddates=extract_dates(text,count_edu)
             print(degrees)
+
+
+
 
     def extract_gender(word_tokens):
         gender=" "

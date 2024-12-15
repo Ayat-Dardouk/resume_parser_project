@@ -67,9 +67,7 @@ function removeElement(elementId) {
       eduids++;
     var id='Educationtable-' + eduids;
     var edegree='eDegree'+eduids+'';
-    var eDate='eDate'+eduids+'';
-    var eInst='eInstitution'+eduids+'';
-    var eGrade='eGrade'+eduids+'';
+    
      var html = 
     `<span style="margin-right: 240px;"><label style="color: black;font-size: 15px;">DEGREE</label> </span>`+
     `<span style="margin-right: 235px;"><label style="color: black;font-size: 15px;">FIELD OF STUDY</label> </span><br>`+
@@ -192,24 +190,18 @@ function addAll(){
     eduids++;
     var id='Educationtable-' + eduids;
     var edegree='eDegree'+eduids+'';
-    var eDate='eDate'+eduids+'';
-    var eInst='eInstitution'+eduids+'';
-    var eGrade='eGrade'+eduids+'';
+
     var efield='efield'+eduids+'';
-    var eEndDate='eEndDate'+eduids+'';
+  
     var html = 
     `<span style="margin-right: 240px;"><label style="color: black;font-size: 15px;">DEGREE</label> </span>`+
     `<span style="margin-right: 235px;"><label style="color: black;font-size: 15px;">FIELD OF STUDY</label> </span><br>`+
    `<span class="sec"><input type="text" name="${edegree}" id="${edegree}" value= "${final.Education[i].Degree}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span>`+ 
    `<span class="sec"><input type="text" name="${efield}" id="${efield}" value= "${final.Education[i].field_of_study}"  style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"></span><br>`+
    `<span style="margin-right: 235px;"><label style="color: black;font-size: 15px;">INSTITUTION</label></span><br>`+
-    `<span class="sec"><input type="text" name="${eInst}" id="${eInst}" value= "${final.Education[i].Institution}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span><br>`+
     `<span class="four" style="margin-right:235px;"><label style="color: black;font-size: 15px;">START DATE</label> </span>`+
     `<span class="four"><label style="color: black;font-size: 15px;">COMPLETION DATE</label> </span><br>`+
-    `<span class="sec"><input type="date" name="${eDate}" id="${eDate}" value= "${final.Education[i].Date}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span>`+
-    `<span class="sec"><input type="date" name="${eEndDate}" id="${eEndDate}" value= "${final.Education[i].EndDate}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span><br>`+
     `<span class="four"><label style="color: black;font-size: 15px;">GRADE</label> </span><br>`+
-    `<span class="four"><input type="text" name="${eGrade}" id="${eGrade}" value= "${final.Education[i].Grade}" style="width: 250px;height: 35px;border-radius: 10px;font-size: 15px;"> </span><br><br>`+
     `<button href="" style="background-color: maroon;color: white;" onclick="removeElement('Educationtable-'+${eduids});">Remove</button><br><br>`;
     addElement('educations', 'div', 'Educationtable-' + eduids, html);
   }

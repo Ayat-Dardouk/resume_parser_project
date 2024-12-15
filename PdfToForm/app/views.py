@@ -1,7 +1,11 @@
 from django.shortcuts import render
+import datetime
+import io
 
-# Create your views here.
+from openpyxl.styles import Font, Alignment
 from django.http import HttpResponse
+from openpyxl import Workbook
+# Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .forms import *
@@ -65,7 +69,7 @@ def MakeForm(text):
 			if isskill(check_line)==True:
 				line=line.replace("[^a-zA-Z0-9]", " ")
 				skills.append(line)
-
+ 
 		if check_line.find("github")!=-1:
 			dictionary["github"]=line
 			continue
@@ -150,26 +154,7 @@ def MakeForm(text):
 					#obj.save()
 					inter={}
 					count=0
-				elif count==2 :
-					if 'Date' not in inter.keys():
-						if bool(re.search(r'[0-9]{4}', check_line))==True :
-							l=re.findall(r'[0-9]{4}', check_line)
-							if len(l)==1:
-								start_date=l[0]+"-01-01"
-								edu['Date']=start_date
-								end_date="2000-01-01"
-								edu['EndDate']=end_date
-							if len(l)==2:
-								start_date=l[0]+"-01-01"
-								edu['Date']=start_date
-								end_date=l[1]+"-01-01"
-								edu['EndDate']=end_date
-							count=3
-							continue
-						else:
-							inter['Date']="2000-01-01"
-					else:
-						count=3
+
 				elif count==1 :
 					if bool(re.search(r'\d', check_line)) ==False :
 						line=re.sub(r"[^a-zA-Z0-9]"," ",line)
@@ -377,8 +362,7 @@ def MakeForm(text):
 					flag=1
 				elif flag==1:
 				#print(line)
-					if bool(re.search(r'\d', check_line)) ==False and 'Institution' not in edu:
-						edu['Institution']=line
+					
 					if  bool(re.search(r'[0-9]{4}', check_line))==True and 'Date' not in edu:
 						l=re.findall(r'[0-9]{4}', check_line)
 						#print(l)
@@ -491,10 +475,8 @@ def academics(request):
 	lt=[]
 	for elt in edus:
 		if elt.degree !=None:
-			dic={'degree':elt.degree,
-				'date':elt.date,
-				'inst':elt.inst,
-				'grade':elt.grade,}
+			dic={'degree':elt.degree}
+				
 			lt.append(dic)
 	return render(request,"academic.html",{'table':lt})
 
@@ -583,9 +565,7 @@ def save(request):
 			total=(int(total))
 			for i in range(1,total+1):
 				deg='eDegree'+ str(i)
-				date='eDate'+str(i)
-				inst='eInstitution'+str(i)
-				grade='eGrade'+str(i)
+				
 				field='efield'+str(i)
 				if request.POST.get(deg)== None:
 					continue
